@@ -1,0 +1,12 @@
+﻿@model VehicleMakeDTO
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<form method="post">
+    <div>Name: <input asp-for="Name" /></div>
+    <div>Abrv: <input asp-for="Abrv" /></div>
+    <input type="submit" />
+</form>

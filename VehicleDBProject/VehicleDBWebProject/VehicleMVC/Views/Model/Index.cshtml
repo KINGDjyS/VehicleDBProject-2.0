@@ -1,0 +1,70 @@
+﻿@model IEnumerable<VehicleModelDTO>
+@{
+    ViewData["Title"] = "Vehicle Models";
+}
+
+<form asp-action="Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Find by Name: <input type="text" name="SearchName"/>
+            <input type="submit" value="Search" class="btn btn-default" /> |
+            <a asp-action="Index">Back to Full List</a>
+        </p>
+    </div>
+</form>
+
+<div>
+    <table border="1">
+        <thead>
+            <tr>
+                <th align="center"><a asp-action="Index" asp-route-SortBy="VehicleMakeId" asp-route-OrderBy="@ViewBag.OrderBy">MAKER ID</a></th>
+                <th align="center"><a asp-action="Index" asp-route-SortBy="Name" asp-route-OrderBy="@ViewBag.OrderBy">NAME</a></th>
+                <th align="center"><a asp-action="Index" asp-route-SortBy="Abrv" asp-route-OrderBy="@ViewBag.OrderBy">ABRV</a></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var mmodel in Model)
+            {
+                using (Html.BeginForm("Delete", "Model", new { id = mmodel.VehicleModelId}))
+                {
+            <tr>
+                <td align="center">@Html.DisplayFor(modeItem => mmodel.VehicleMakeId)</td>
+                <td align="center">@Html.DisplayFor(modeItem => mmodel.Name)</td>
+                <td align="center">@Html.DisplayFor(modeItem => mmodel.Abrv)</td>
+                <td align="center">
+                    <a asp-action="Edit" asp-route-id="@mmodel.VehicleModelId">Edit</a> |
+                    <input type="submit" value="Delete" />
+                </td>
+            </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+
+<div><a class="nav-link text-dark" asp-area="" asp-controller="Model" asp-action="Create">Create</a></div>
+<div>
+    @{ if (ViewBag.HasPrevious)
+        {
+            <a asp-action="Index"
+               asp-route-SortBy="@VehicleMVC.Controllers.ModelController.CurrentSort"
+               asp-route-OrderBy="@VehicleMVC.Controllers.ModelController.CurrentOrder"
+               asp-route-PageNumber="@(VehicleMVC.Controllers.ModelController.CurrentPage - 1)"
+               asp-route-Elements="@(VehicleMVC.Controllers.ModelController.ElementsGot - VehicleMVC.Controllers.ModelController.NumberOfElements)"
+               class="btn btn-default">
+                Previous
+            </a>
+        }
+        if (ViewBag.HasNext)
+        {
+            <a asp-action="Index"
+               asp-route-SortBy="@VehicleMVC.Controllers.ModelController.CurrentSort"
+               asp-route-OrderBy="@VehicleMVC.Controllers.ModelController.CurrentOrder"
+               asp-route-PageNumber="@(VehicleMVC.Controllers.ModelController.CurrentPage + 1)"
+               asp-route-Elements="@(VehicleMVC.Controllers.ModelController.ElementsGot + VehicleMVC.Controllers.ModelController.NumberOfElements)"
+               class="btn btn-default">
+                Next
+            </a>
+        }
+    }
+</div>

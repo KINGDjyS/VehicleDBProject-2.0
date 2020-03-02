@@ -1,0 +1,27 @@
+﻿@model VehicleMakeDTO
+@{
+    ViewData["Title"] = "Edit";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>@Model.Name</legend>
+
+        @Html.HiddenFor(model => model.VehicleMakeId)
+
+        <div>@Html.LabelFor(model => model.Name)</div>
+        <div>@Html.EditorFor(model => model.Name)</div>
+
+        <div>@Html.LabelFor(model => model.Abrv)</div>
+        <div>@Html.EditorFor(model => model.Abrv)</div>
+
+        <p><input type="submit" value="Save"/></p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

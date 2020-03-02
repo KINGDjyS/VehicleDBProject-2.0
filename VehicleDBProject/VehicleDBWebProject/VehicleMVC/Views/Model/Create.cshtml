@@ -1,0 +1,12 @@
+﻿@model VehicleModelDTO
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<form method="post">
+    <div><select asp-for="VehicleMakeId" asp-items="@(new SelectList(ViewBag.Makers, "VehicleMakeId", "Name"))"><option value="">--Select--</option></select> /></div>
+    <div>Name: <input asp-for="Name" /></div>
+    <div>Abrv: <input asp-for="Abrv" /></div>
+    <input type="submit" />
+</form>
